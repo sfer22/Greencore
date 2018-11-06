@@ -1,0 +1,58 @@
+========
+Semana 8
+========
+
+OOP - Herencia
+
+
+                        Clase Vehiculo       ------> Padre
+                      /----------------\
+                     /     avanzar()    \
+                    /                    \
+                   /                      \
+                  /                        \
+             Clase Carro                Clase Camion
+            -------------              --------------
+         metodos especificos         metodos especificos
+
+
+Un carro es un vehiculo al igual que un camion, cada uno tiene funciones especificas pero comparten funcionalidades basicas.
+
+Abstraccion: concepto fundamental para el desacoplamiento en diseño de software. La abstraccion es la base del segundo
+principio de OOP (encapsulamiento)
+
+Interfaz comun algo que permite que las cosas funcionen de una misma manera.
+
+Control de acceso en python:
+
+atributo publico nombre
+atributo privado __nombre
+atributo protected _nombre
+
+Tercer principio de la programacion (Polimorfismo)
+
+Una clase puede verse como una instancia de mas de una clase, por ejemplo las herencias
+
+
+                                 A
+                                / \
+                               /   \
+                              B     C
+
+
+ B puede verse como una instancia de A porque posee todas sus propiedades o una instacia de B.
+
+ @property decorador para que el codigo se vea mas bonito. hace que los metodos se vean como una propiedad de la instancia.
+
+ Diseño de clases:
+
+
+
+   o             _________          _________
+  \|/  ______    |carro  |  ______  | motor |
+  / \            |_______|          |_______|
+
+
+La persona deberia poder interactuar con el carro para saber si esta encendido o no. Y el carro es el que sabe como
+preguntarle al motor. Si la persona pudiera hablar con el motor directamente, 1 de dos o tiene acceso al motor y no deberia
+o puede que mame cuando se cambie el motor por otro porque no tiene acceso a esa implementacion.
