@@ -1,21 +1,42 @@
+"""
+Antes de ejecutar este programa, se debe instalar flask por medio del comando:
+pip install flask
+"""
 import os
 from flask import Flask, jsonify, request
 
-app = Flask(__name__)
+app = Flask("EvilApi")
 app.debug = True
 
 persons = []
+subscribers = []
 
 
-def id_exisits(id, persons):
+def id_exists(id, persons):
     app.logger.debug("id_exists was called")
     app.logger.debug(id)
     app.logger.debug(persons)
     for person in persons:
         if person["id"] == id:
             return True
+    return False
 
-        return False
+
+def post_subscriber():
+    if not request.is_json:
+        return jsonify({
+            "msg": "Only json is supported in this api"
+        }), 400
+
+    datos = request.get_json()
+
+    if "ip" not in datos:
+        return jsonify({
+            "msg": "An id is required"
+        }), 400
+
+    subscribers.append(datos["ip"])
+    return jsonify({"msg": "todo salio bien"}), 200
 
 
 @app.route('/')
@@ -25,21 +46,24 @@ def get_root_resource():
 
 @app.route('/api/v1/person', methods=["POST"])
 def post_person():
+    # esto es una validación para garantizar que los datos vienen en json que es
+    # lo que este servidor sabe interpretar.
     if not request.is_json:
         return jsonify({
-            "msg": "only json is supported in this API"
+            "msg": "Only json is supported in this api"
         }), 400
 
-    # Si llegamos aca es porque los datos si son JSON
+    # Si llegamos acá es porque los datos sí son JSON
     datos = request.get_json()
 
-    # Para poder crear una persona (recurso) es mandadorio que tenga un id unico
+    # Para poder crear una persona (recurso) es mandatorio
+    # que tenga un id único
     if "id" not in datos:
         return jsonify({
             "msg": "An id is required"
         }), 400
 
-    if id_exisits(datos["id"], persons):
+    if id_exists(datos["id"], persons):
         return jsonify({
             "msg": "The provided id is already in use"
         }), 400
