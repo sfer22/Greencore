@@ -127,7 +127,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Python_Intro_Tareas" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -256,10 +256,10 @@
     </configuration>
     <list>
       <item itemvalue="Python.Numero_Mayor" />
-      <item itemvalue="Python.Vacaciones_Trabajo" />
       <item itemvalue="Python.Perron" />
-      <item itemvalue="Python.ddd" />
       <item itemvalue="Python.Round_Sum" />
+      <item itemvalue="Python.Vacaciones_Trabajo" />
+      <item itemvalue="Python.ddd" />
     </list>
     <recent_temporary>
       <list>
