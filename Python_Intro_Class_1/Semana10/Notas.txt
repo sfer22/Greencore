@@ -1,0 +1,32 @@
+Semana 10
+---------
+
+Consumo de servicios:
+
+HTTP:
+
+-Tiene una interfaz uniforme:
+
+Porque utilizar verbos:
+
+GET, PUT, POST, DELETE
+
+Diferencia entre URL y URI
+
+URL es hasta el resource, URI es un identificador:
+
+URL:
+
+http://api.example.com/v1/person ----> resource
+----   ---  ---------  ---------
+proto  host domain     path
+
+URI:
+
+http://api.example.com/v1/person/1478 ----> uid (unique id)
+
+************************************************************
+
+Postman:
+
+Cliente para crear http requests
