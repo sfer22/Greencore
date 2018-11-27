@@ -2,12 +2,24 @@ import os
 from flask import Flask, jsonify, request
 
 app = Flask("EvilApi")
+app.debug = True
 
 subscribers = []
+
+
+def ip_exists(ip, subscribers):
+    app.logger.debug("ip_exists was called")
+    app.logger.debug(ip)
+    app.logger.debug(subscribers)
+    if ip in subscribers:
+            return True
+    return False
+
 
 @app.route('/')
 def get_root_resource():
     return 'This is a root resource'
+
 
 @app.route('/api/v1/subscriber', methods=["POST"])
 def post_subscriber():
@@ -23,16 +35,17 @@ def post_subscriber():
             "msg": "An IP is required"
         }), 400
 
-    if id_exists(datos["id"], persons):
+    if ip_exists(datos["ip"], subscribers):
         return jsonify({
-            "msg": "The provided id is already in use"
+            "msg": "The provided IP address is already subscribed"
         }), 400
 
     subscribers.append(datos["ip"])
 
     return jsonify({
-        "msg": "su direccion IP ha sido suscrita"
+        "msg": "Your IP address is now subscribed"
     }), 200
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
