@@ -5,6 +5,7 @@ app = Flask("EvilApi")
 app.debug = True
 
 subscribers = []
+message = ""
 
 
 def ip_exists(ip, subscribers):
@@ -21,7 +22,7 @@ def get_root_resource():
     return 'This is a root resource'
 
 
-@app.route('/api/v1/subscriber', methods=["POST"])
+@app.route('/api/v1/subscribers', methods=["POST"])
 def post_subscriber():
     if not request.is_json:
         return jsonify({
@@ -44,6 +45,40 @@ def post_subscriber():
 
     return jsonify({
         "msg": "Your IP address is now subscribed"
+    }), 200
+
+
+@app.route('/api/v1/messages', methods=["PUT"])
+def print_message():
+    if not request.is_json:
+        return jsonify({
+            "msg": "Only json is supported in this api"
+        }), 400
+
+    datos = request.get_json()
+
+    if "msg" not in datos:
+        return jsonify({
+            "msg": "A message is required"
+        }), 400
+
+    message = datos["msg"]
+    app.logger.debug(message)
+
+    return jsonify({
+        "msg": "Message received"
+    }), 200, message
+
+
+@app.route('/api/v1/messages', methods=["POST"])
+def broadcast_message(message, subscribers):
+    for subscriber in subscribers:
+        endpoint = "http://{}:5000/api/v1/messages".format(subscriber)
+        response = request.put(url=endpoint, json={"msg": message})
+        app.logger.debug(response.status_code)
+
+    return jsonify({
+        "msg": "Message broadcasted"
     }), 200
 
 
